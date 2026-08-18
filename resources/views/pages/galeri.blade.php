@@ -5,29 +5,29 @@
 @section('content')
 
 <x-page-hero
-    title="Galeri Eskul Musik"
-    subtitle="Dokumentasi kegiatan dan penampilan kami"
+    :title="$content['gallery_title']"
+    :subtitle="$content['gallery_subtitle']"
 />
 
 <!-- GALERI -->
 <section class="container py-5">
     <div class="section-heading text-center" data-reveal>
         <span class="section-kicker">Dokumentasi</span>
-        <h2>Momen Eskul Musik</h2>
-        <p>Filter kategori untuk melihat foto kegiatan yang kamu cari.</p>
+        <h2>{{ $content['gallery_heading'] }}</h2>
+        <p>{{ $content['gallery_text'] }}</p>
     </div>
 
     <div class="filter-bar" data-gallery-filters data-reveal>
         <button class="filter-btn active" type="button" data-filter="all">Semua</button>
-        <button class="filter-btn" type="button" data-filter="band">Band</button>
-        <button class="filter-btn" type="button" data-filter="event">Event</button>
-        <button class="filter-btn" type="button" data-filter="paduan-suara">Paduan Suara</button>
+        @foreach ($categories as $category)
+            <button class="filter-btn" type="button" data-filter="{{ \Illuminate\Support\Str::slug($category) }}">{{ $category }}</button>
+        @endforeach
     </div>
 
     <div class="row g-4 gallery-grid">
         @foreach ($galeris as $item)
         <div class="col-md-4 col-sm-6">
-            <x-gallery-image :image="$item->gambar" :caption="$item->judul" />
+            <x-gallery-image :image="$item->gambar" :caption="$item->judul" :category="$item->kategori ?? $item->judul" />
         </div>
         @endforeach
 

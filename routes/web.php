@@ -16,8 +16,11 @@ Route::get('/artikel/{artikel}', [PagesController::class, 'detailArtikel'])->nam
 //admin
 use App\Http\Controllers\Admin\ArtikelController;
 use App\Http\Controllers\Admin\GaleriController;
+use App\Http\Controllers\Admin\SiteContentController;
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/konten', [SiteContentController::class, 'edit'])->name('admin.content.edit');
+    Route::put('/konten', [SiteContentController::class, 'update'])->name('admin.content.update');
 
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('admin.artikel');
     Route::get('/artikel/create', [ArtikelController::class, 'create'])->name('admin.artikel.create');

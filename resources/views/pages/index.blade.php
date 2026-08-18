@@ -5,28 +5,28 @@
 @section('content')
 
 <x-page-hero
-    title="Selamat Datang di Website Eskul Musik"
-    subtitle="Tempat mengembangkan bakat musik siswa"
+    :title="$content['home_title']"
+    :subtitle="$content['home_subtitle']"
 />
 
 <section class="container intro-strip" data-reveal>
     <div class="row g-3 text-center">
         <div class="col-md-4">
             <div class="mini-stat">
-                <strong>Band</strong>
-                <span>Latihan aransemen dan panggung</span>
+                <strong>{{ $content['home_stat_1_title'] }}</strong>
+                <span>{{ $content['home_stat_1_text'] }}</span>
             </div>
         </div>
         <div class="col-md-4">
             <div class="mini-stat">
-                <strong>Padus</strong>
-                <span>Vokal, harmoni, dan kekompakan</span>
+                <strong>{{ $content['home_stat_2_title'] }}</strong>
+                <span>{{ $content['home_stat_2_text'] }}</span>
             </div>
         </div>
         <div class="col-md-4">
             <div class="mini-stat">
-                <strong>Event</strong>
-                <span>Dokumentasi penampilan sekolah</span>
+                <strong>{{ $content['home_stat_3_title'] }}</strong>
+                <span>{{ $content['home_stat_3_text'] }}</span>
             </div>
         </div>
     </div>
@@ -36,8 +36,8 @@
 <section class="container py-5">
     <div class="section-heading text-center" data-reveal>
         <span class="section-kicker">Eksplorasi</span>
-        <h2>Kegiatan Kami</h2>
-        <p>Pilih salah satu kegiatan untuk melihat dokumentasi galeri.</p>
+        <h2>{{ $content['home_activity_heading'] }}</h2>
+        <p>{{ $content['home_activity_text'] }}</p>
     </div>
 
     <div class="row g-4 justify-content-center">
@@ -61,7 +61,7 @@
 <section class="container pb-5">
     <div class="section-heading text-center" data-reveal>
         <span class="section-kicker">Cerita terbaru</span>
-        <h2>Artikel</h2>
+        <h2>{{ $content['home_article_heading'] }}</h2>
     </div>
 
     @forelse ($artikels as $artikel)

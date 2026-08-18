@@ -12,6 +12,21 @@
     <div class="row g-4">
         <div class="col-md-6">
             <x-content-card class="h-100">
+                <h4>Kelola Konten Website</h4>
+                <p>Ubah teks hero, profil, jadwal, Instagram, heading artikel, dan galeri tanpa edit code.</p>
+
+                @if (auth()->user()->role === 'admin')
+                    <a href="{{ route('admin.content.edit') }}" class="btn btn-primary">Buka Admin Konten</a>
+                @else
+                    <div class="alert alert-warning mb-0">
+                        Akun kamu belum punya akses admin.
+                    </div>
+                @endif
+            </x-content-card>
+        </div>
+
+        <div class="col-md-6">
+            <x-content-card class="h-100">
                 <h4>Kelola Artikel</h4>
                 <p>Tambah, edit, atau hapus artikel yang tampil di halaman artikel dan home.</p>
 

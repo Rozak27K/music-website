@@ -5,15 +5,15 @@
 @section('content')
 
 <x-page-hero
-    title="Artikel Eskul Musik"
-    subtitle="Informasi, kegiatan, dan manfaat mengikuti ekstrakurikuler musik"
+    :title="$content['article_title']"
+    :subtitle="$content['article_subtitle']"
 />
 
 <!-- ARTIKEL -->
 <section class="container py-5">
     <div class="section-heading text-center" data-reveal>
         <span class="section-kicker">Baca</span>
-        <h2>Artikel Eskul Musik</h2>
+        <h2>{{ $content['article_heading'] }}</h2>
     </div>
 
     <div class="article-search" data-reveal>

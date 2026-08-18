@@ -5,9 +5,13 @@
 @section('content')
 
 <x-page-hero
-    title="Profil Ekstrakurikuler Musik"
-    subtitle="Mengenal lebih dekat tentang kami"
+    :title="$content['profile_title']"
+    :subtitle="$content['profile_subtitle']"
 />
+
+@php
+    $lines = fn ($value) => array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $value)));
+@endphp
 
 <!-- CONTENT -->
 <section class="container py-5">
@@ -17,8 +21,8 @@
         <div class="col-lg-4 text-center">
             <div class="profile-logo-panel" data-reveal>
                 <img src="{{ asset('image/musiklogo.png') }}" class="logo-img" alt="Logo Musik">
-                <h2>Musik yang tumbuh bareng teman.</h2>
-                <p>Tempat siswa belajar ritme, suara, kerja sama, dan berani tampil.</p>
+                <h2>{{ $content['profile_intro_title'] }}</h2>
+                <p>{{ $content['profile_intro_text'] }}</p>
             </div>
         </div>
 
@@ -30,20 +34,11 @@
                 $kiri = [
                     [
                         'title' => 'Tentang Kami',
-                        'content' => '<p class="text-center">
-                            Ekstrakurikuler Musik adalah wadah bagi siswa untuk menyalurkan
-                            minat dan bakat di bidang musik serta melatih kreativitas,
-                            kerja sama, dan kepercayaan diri.
-                        </p>'
+                        'content' => '<p class="text-center">' . e($content['profile_about']) . '</p>'
                     ],
                     [
                         'title' => 'Kegiatan',
-                        'content' => '<ul>
-                            <li>Latihan Band</li>
-                            <li>Latihan Paduan Suara</li>
-                            <li>Penampilan event sekolah</li>
-                            <li>Pengisi hiburan acara tertentu</li>
-                        </ul>'
+                        'content' => '<ul><li>' . implode('</li><li>', array_map('e', $lines($content['profile_activities']))) . '</li></ul>'
                     ]
                 ];
                 @endphp
@@ -57,13 +52,13 @@
                 <!-- SOCIAL -->
                 <x-content-card title="Instagram" class="text-center">
                     <div class="social-icons">
-                        <a href="https://www.instagram.com/p/DSxgmWIiRhr/?utm_source=ig_web_copy_link" target="_blank">
+                        <a href="{{ $content['instagram_url'] }}" target="_blank" rel="noopener">
                             <i class="bi bi-instagram"></i>
                         </a>
                     </div>
                     <p class="mt-2">
-                        <a href="https://www.instagram.com/p/DSxgmWIiRhr/?utm_source=ig_web_copy_link">
-                            @musiksmeskarofficial
+                        <a href="{{ $content['instagram_url'] }}" target="_blank" rel="noopener">
+                            {{ $content['instagram_label'] }}
                         </a>
                     </p>
                 </x-content-card>
@@ -79,43 +74,23 @@
                 $kanan = [
                     [
                         'title' => 'Visi',
-                        'content' => '<p class="text-center">
-                            Menjadikan ekskul musik sebagai ruang kreatif, solid, dan menyenangkan.
-                        </p>'
+                        'content' => '<p class="text-center">' . e($content['profile_vision']) . '</p>'
                     ],
                     [
                         'title' => 'Misi',
-                        'content' => '<ul>
-                            <li>Mengembangkan bakat musik anggota</li>
-                            <li>Membangun kekompakan</li>
-                            <li>Tampil di acara sekolah</li>
-                        </ul>'
+                        'content' => '<ul><li>' . implode('</li><li>', array_map('e', $lines($content['profile_mission']))) . '</li></ul>'
                     ],
                     [
                         'title' => 'Pengurus Harian',
-                        'content' => '<ul>
-                            <li>Ketua: Annisa Nisfi Ramadani</li>
-                            <li>Wakil: Novtriza Aquila Asha</li>
-                            <li>Sekretaris 1: Melisa Ayu Setio Wati</li>
-                            <li>Sekretaris 2: Faizah Azzahra</li>
-                            <li>Bendahara 1: Qisa Nahla Billah</li>
-                            <li>Bendahara 2: Kayla Salfana</li>
-                        </ul>'
+                        'content' => '<ul><li>' . implode('</li><li>', array_map('e', $lines($content['profile_board']))) . '</li></ul>'
                     ],
                     [
                         'title' => 'Jadwal Latihan',
-                        'content' => '<p class="text-center">
-                            Setiap <b>hari Selasa</b> setelah jam pelajaran
-                        </p>'
+                        'content' => '<p class="text-center">' . e($content['profile_schedule']) . '</p>'
                     ],
                     [
                         'title' => 'Manfaat',
-                        'content' => '<ul>
-                            <li>Mengembangkan bakat</li>
-                            <li>Melatih percaya diri</li>
-                            <li>Menambah pengalaman tampil</li>
-                            <li>Memperluas pertemanan</li>
-                        </ul>'
+                        'content' => '<ul><li>' . implode('</li><li>', array_map('e', $lines($content['profile_benefits']))) . '</li></ul>'
                     ]
                 ];
                 @endphp

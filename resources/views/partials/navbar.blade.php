@@ -29,6 +29,9 @@
 
                 @if (auth()->user()->role === 'admin')
                     <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('admin.content*') ? 'active' : '' }}" href="{{ route('admin.content.edit') }}">Admin Konten</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('admin.artikel*') ? 'active' : '' }}" href="{{ route('admin.artikel') }}">Admin Artikel</a>
                     </li>
                     <li class="nav-item">
