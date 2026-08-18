@@ -14,13 +14,17 @@
     <div class="row g-4 justify-content-center align-items-start">
 
         <!-- LOGO -->
-        <div class="col-md-4 text-center">
-            <img src="{{ asset('image/musiklogo.png') }}" class="logo-img" alt="Logo Musik">
+        <div class="col-lg-4 text-center">
+            <div class="profile-logo-panel" data-reveal>
+                <img src="{{ asset('image/musiklogo.png') }}" class="logo-img" alt="Logo Musik">
+                <h2>Musik yang tumbuh bareng teman.</h2>
+                <p>Tempat siswa belajar ritme, suara, kerja sama, dan berani tampil.</p>
+            </div>
         </div>
 
         <!-- KIRI -->
-        <div class="col-md-4">
-            <div class="card profile-card shadow p-4">
+        <div class="col-lg-4">
+            <div class="profile-card">
 
                 @php
                 $kiri = [
@@ -68,8 +72,8 @@
         </div>
 
         <!-- KANAN -->
-        <div class="col-md-4">
-            <div class="card profile-card shadow p-4">
+        <div class="col-lg-4">
+            <div class="profile-card">
 
                 @php
                 $kanan = [

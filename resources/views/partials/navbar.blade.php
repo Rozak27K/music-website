@@ -1,10 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 sticky-top">
+<nav class="navbar navbar-expand-lg site-navbar px-4 sticky-top">
     <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url('/') }}">
-        <img src="{{ asset('image/musiklogo.png') }}" width="60">
-        <span>Eskul Musik</span>
+        <img src="{{ asset('image/musiklogo.png') }}" width="58" alt="Logo Eskul Musik">
+        <span class="brand-text">Eskul Musik</span>
     </a>
 
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Buka menu">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -37,7 +37,7 @@
                 @endif
 
                 <li class="nav-item">
-                    <form action="{{ route('logout') }}" method="POST">
+                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
                         @csrf
                         <button type="submit" class="nav-link btn btn-link">Logout</button>
                     </form>

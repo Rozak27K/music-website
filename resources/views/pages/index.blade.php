@@ -9,10 +9,36 @@
     subtitle="Tempat mengembangkan bakat musik siswa"
 />
 
+<section class="container intro-strip" data-reveal>
+    <div class="row g-3 text-center">
+        <div class="col-md-4">
+            <div class="mini-stat">
+                <strong>Band</strong>
+                <span>Latihan aransemen dan panggung</span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="mini-stat">
+                <strong>Padus</strong>
+                <span>Vokal, harmoni, dan kekompakan</span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="mini-stat">
+                <strong>Event</strong>
+                <span>Dokumentasi penampilan sekolah</span>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- KEGIATAN -->
 <section class="container py-5">
-    <h2 class="text-center mb-4">Kegiatan Kami</h2>
-    <p class="text-center mb-2">pencet gambar untuk melanjutkan ke halaman galeri</p>
+    <div class="section-heading text-center" data-reveal>
+        <span class="section-kicker">Eksplorasi</span>
+        <h2>Kegiatan Kami</h2>
+        <p>Pilih salah satu kegiatan untuk melihat dokumentasi galeri.</p>
+    </div>
 
     <div class="row g-4 justify-content-center">
 
@@ -33,10 +59,13 @@
 
 <!-- ARTIKEL -->
 <section class="container pb-5">
-    <h2 class="text-center mb-4">Artikel</h2>
+    <div class="section-heading text-center" data-reveal>
+        <span class="section-kicker">Cerita terbaru</span>
+        <h2>Artikel</h2>
+    </div>
 
     @forelse ($artikels as $artikel)
-        <x-content-card class="mb-3">
+        <x-content-card class="mb-3 article-preview">
             <h4>{{ $artikel->judul }}</h4>
             <p>
                 {{ \Illuminate\Support\Str::limit($artikel->isi, 100) }}
@@ -61,7 +90,7 @@
     @endforelse
 
     <div class="text-center mt-4">
-        <a href="{{ route('artikel') }}" class="btn btn-primary">Lihat Artikel Lainnya</a>
+        <a href="{{ route('artikel') }}" class="btn btn-primary">Lihat Artikel Lainnya <i class="bi bi-arrow-right"></i></a>
     </div>
 </section>
 
