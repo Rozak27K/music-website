@@ -75,6 +75,9 @@ try {
     /** @var Application $app */
     $app = require_once __DIR__.'/../bootstrap/app.php';
 
+    $request = Request::capture();
+    $app->instance('request', $request);
+
     $app->bootstrapWith([
         LoadEnvironmentVariables::class,
         LoadConfiguration::class,
@@ -83,7 +86,7 @@ try {
         BootProviders::class,
     ]);
 
-    $app->handleRequest(Request::capture());
+    $app->handleRequest($request);
 } catch (Throwable $exception) {
     for ($current = $exception; $current !== null; $current = $current->getPrevious()) {
         error_log(sprintf(
