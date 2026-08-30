@@ -29,9 +29,25 @@ register_shutdown_function(function () {
 
 if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL'])) {
     $storagePath = '/tmp/laravel-storage';
+    $cachePath = '/tmp/laravel-cache';
 
     $_ENV['LARAVEL_STORAGE_PATH'] = $storagePath;
     $_SERVER['LARAVEL_STORAGE_PATH'] = $storagePath;
+
+    foreach ([
+        'APP_CONFIG_CACHE' => $cachePath.'/config.php',
+        'APP_EVENTS_CACHE' => $cachePath.'/events.php',
+        'APP_PACKAGES_CACHE' => $cachePath.'/packages.php',
+        'APP_ROUTES_CACHE' => $cachePath.'/routes.php',
+        'APP_SERVICES_CACHE' => $cachePath.'/services.php',
+    ] as $key => $path) {
+        $_ENV[$key] = $path;
+        $_SERVER[$key] = $path;
+    }
+
+    if (! is_dir($cachePath)) {
+        mkdir($cachePath, 0777, true);
+    }
 
     foreach ([
         'app/public',
