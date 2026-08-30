@@ -5,25 +5,42 @@
 @section('content')
 <x-page-hero :title="$artikel->judul" subtitle="Artikel Eskul Musik" />
 
-<section class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            @if ($artikel->gambar)
-                <img src="{{ asset('image/' . $artikel->gambar) }}" alt="{{ $artikel->judul }}" class="img-fluid rounded mb-4 w-100">
-            @endif
+<section class="bg-white py-20">
+    <div class="mx-auto max-w-4xl px-6">
+        @php
+            $image = $artikel->gambar
+                ? (str_contains($artikel->gambar, '/') ? asset('storage/' . $artikel->gambar) : asset('image/' . $artikel->gambar))
+                : null;
+        @endphp
 
-            <x-content-card class="p-2 article-detail-card">
-                <h2 class="mb-3">{{ $artikel->judul }}</h2>
-                <p class="text-muted">
-                    Dibuat pada {{ $artikel->created_at->format('d M Y') }}
-                </p>
-                <p style="white-space: pre-line;">{{ $artikel->isi }}</p>
+        @if ($image)
+            <img
+                src="{{ $image }}"
+                alt="{{ $artikel->judul }}"
+                class="fade-up mb-8 h-[420px] w-full rounded-2xl object-cover shadow-lg"
+            >
+        @endif
 
-                <div class="mt-3">
-                    <a href="{{ route('artikel') }}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Kembali ke Artikel</a>
-                </div>
-            </x-content-card>
-        </div>
+        <article class="fade-up rounded-2xl border border-slate-200 bg-white p-7 shadow-sm md:p-10">
+            <p class="text-sm font-black uppercase tracking-[0.22em] text-purple-700">
+                {{ $artikel->created_at->format('d M Y') }}
+            </p>
+
+            <h1 class="mt-4 text-3xl font-black leading-tight text-[#202427] md:text-5xl">
+                {{ $artikel->judul }}
+            </h1>
+
+            <div class="mt-8 whitespace-pre-line text-lg leading-9 text-slate-700">
+                {{ $artikel->isi }}
+            </div>
+
+            <a
+                href="{{ route('artikel') }}"
+                class="mt-10 inline-flex rounded-full bg-[#202427] px-6 py-3 text-sm font-black text-white transition hover:bg-purple-800"
+            >
+                Kembali ke Artikel
+            </a>
+        </article>
     </div>
 </section>
 @endsection

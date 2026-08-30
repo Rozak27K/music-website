@@ -1,39 +1,55 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
+@extends('layouts.app')
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+@section('title', 'Reset Password | Eskul Musik')
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+@section('content')
+<section class="relative overflow-hidden bg-gradient-to-br from-[#cf77dd] via-[#b636c6] to-[#9419b5] px-6 py-20">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.24),transparent_28rem)]"></div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+    <div class="relative mx-auto flex min-h-[680px] max-w-7xl items-center justify-center">
+        <x-auth-card
+            title="Reset Password"
+            subtitle="Buat password baru untuk akun Eskul Musik kamu."
+        >
+            <form method="POST" action="{{ route('password.store') }}">
+                @csrf
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
+                <x-auth-input
+                    label="Email"
+                    name="email"
+                    type="email"
+                    :value="$request->email"
+                    placeholder="contoh@email.com"
+                    required
+                    autofocus
+                    autocomplete="username"
+                />
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
+                <x-auth-input
+                    label="Password Baru"
+                    name="password"
+                    type="password"
+                    placeholder="Masukkan password baru"
+                    required
+                    autocomplete="new-password"
+                />
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+                <x-auth-input
+                    label="Konfirmasi Password"
+                    name="password_confirmation"
+                    type="password"
+                    placeholder="Ulangi password baru"
+                    required
+                    autocomplete="new-password"
+                />
+
+                <x-auth-button>
+                    Simpan Password
+                </x-auth-button>
+            </form>
+        </x-auth-card>
+    </div>
+</section>
+@endsection

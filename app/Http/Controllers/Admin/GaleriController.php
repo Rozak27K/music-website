@@ -5,15 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Galeri;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class GaleriController extends Controller
 {
     public function index()
     {
-        $galeris = Galeri::latest()->get();
+        $galeris = Galeri::latest()->paginate(9);
 
-        return view('admin.galeri.index', compact('galeris'));
+        return view(
+            'admin.galeri.index',
+            compact('galeris')
+        );
     }
 
     public function create()
@@ -23,63 +26,84 @@ class GaleriController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'judul' => ['required', 'string', 'max:255'],
-            'kategori' => ['nullable', 'string', 'max:255'],
-            'gambar' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+        $validated = $request->validate([
+            'judul' => 'required|max:255',
+            'deskripsi' => 'nullable',
+            'kategori' => 'required|string|max:50',
+            'gambar' => [
+                'required',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:3072',
+            ],
         ]);
 
-        $namaGambar = time() . '-' . $request->file('gambar')->getClientOriginalName();
-        $request->file('gambar')->move(public_path('image'), $namaGambar);
-        $data['gambar'] = $namaGambar;
+        $validated['gambar'] = $request
+            ->file('gambar')
+            ->store('galeri', 'public');
 
-        Galeri::create($data);
+        Galeri::create($validated);
 
-        return redirect()->route('admin.galeri')->with('success', 'Galeri berhasil ditambahkan.');
+        return redirect()
+            ->route('admin.galeri.index')
+            ->with('success', 'Foto berhasil ditambahkan.');
     }
 
-    public function edit($id)
+    public function edit(Galeri $galeri)
     {
-        $galeri = Galeri::findOrFail($id);
-
-        return view('admin.galeri.edit', compact('galeri'));
+        return view(
+            'admin.galeri.edit',
+            compact('galeri')
+        );
     }
 
-    public function update(Request $request, $id)
-    {
-        $galeri = Galeri::findOrFail($id);
+    public function update(
+        Request $request,
+        Galeri $galeri
+    ) {
 
-        $data = $request->validate([
-            'judul' => ['required', 'string', 'max:255'],
-            'kategori' => ['nullable', 'string', 'max:255'],
-            'gambar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+        $validated = $request->validate([
+            'judul' => 'required|max:255',
+            'deskripsi' => 'nullable',
+            'kategori' => 'required|string|max:50',
+            'gambar' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:3072',
+            ],
         ]);
 
         if ($request->hasFile('gambar')) {
-            if ($galeri->gambar && File::exists(public_path('image/' . $galeri->gambar))) {
-                File::delete(public_path('image/' . $galeri->gambar));
+
+            if ($galeri->gambar) {
+                Storage::disk('public')
+                    ->delete($galeri->gambar);
             }
 
-            $namaGambar = time() . '-' . $request->file('gambar')->getClientOriginalName();
-            $request->file('gambar')->move(public_path('image'), $namaGambar);
-            $data['gambar'] = $namaGambar;
+            $validated['gambar'] = $request
+                ->file('gambar')
+                ->store('galeri', 'public');
         }
 
-        $galeri->update($data);
+        $galeri->update($validated);
 
-        return redirect()->route('admin.galeri')->with('success', 'Galeri berhasil diubah.');
+        return redirect()
+            ->route('admin.galeri.index')
+            ->with('success', 'Foto berhasil diperbarui.');
     }
 
-    public function destroy($id)
+    public function destroy(Galeri $galeri)
     {
-        $galeri = Galeri::findOrFail($id);
-
-        if ($galeri->gambar && File::exists(public_path('image/' . $galeri->gambar))) {
-            File::delete(public_path('image/' . $galeri->gambar));
+        if ($galeri->gambar) {
+            Storage::disk('public')
+                ->delete($galeri->gambar);
         }
 
         $galeri->delete();
 
-        return redirect()->route('admin.galeri')->with('success', 'Galeri berhasil dihapus.');
+        return redirect()
+            ->route('admin.galeri.index')
+            ->with('success', 'Foto berhasil dihapus.');
     }
 }

@@ -1,27 +1,33 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+@extends('layouts.app')
+
+@section('title', 'Konfirmasi Password | Eskul Musik')
+
+@section('content')
+<section class="relative overflow-hidden bg-gradient-to-br from-[#cf77dd] via-[#b636c6] to-[#9419b5] px-6 py-20">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.24),transparent_28rem)]"></div>
+
+    <div class="relative mx-auto flex min-h-[560px] max-w-7xl items-center justify-center">
+        <x-auth-card
+            title="Konfirmasi Password"
+            subtitle="Masukkan password untuk melanjutkan ke area aman."
+        >
+            <form method="POST" action="{{ route('password.confirm') }}">
+                @csrf
+
+                <x-auth-input
+                    label="Password"
+                    name="password"
+                    type="password"
+                    placeholder="Masukkan password"
+                    required
+                    autocomplete="current-password"
+                />
+
+                <x-auth-button>
+                    Konfirmasi
+                </x-auth-button>
+            </form>
+        </x-auth-card>
     </div>
-
-    <form method="POST" action="{{ route('password.confirm') }}">
-        @csrf
-
-        <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</section>
+@endsection

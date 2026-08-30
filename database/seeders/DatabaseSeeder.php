@@ -15,11 +15,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        if (env('ADMIN_EMAIL') && env('ADMIN_PASSWORD')) {
+            User::firstOrCreate(
+                ['email' => env('ADMIN_EMAIL')],
+                [
+                    'name' => env('ADMIN_NAME', 'Admin Eskul Musik'),
+                    'password' => env('ADMIN_PASSWORD'),
+                    'role' => 'admin',
+                ]
+            );
+        }
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $this->call(DefaultGaleriSeeder::class);
     }
 }

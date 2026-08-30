@@ -3,61 +3,78 @@
 @section('title', 'Register | Eskul Musik')
 
 @section('content')
-<section class="auth-page">
-    <x-auth-card
-        title="Gabung Eskul Musik"
-        subtitle="Buat akun untuk masuk ke website dan mengikuti informasi terbaru."
-    >
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
+<section class="relative overflow-hidden bg-gradient-to-br from-[#cf77dd] via-[#b636c6] to-[#9419b5] px-6 py-20">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.24),transparent_28rem)]"></div>
 
-            <x-auth-input
-                label="Nama"
-                name="name"
-                placeholder="Nama lengkap"
-                required
-                autofocus
-                autocomplete="name"
-            />
+    <div class="relative mx-auto flex min-h-[720px] max-w-7xl items-center justify-center">
+        <x-auth-card
+            title="Gabung Eskul Musik"
+            subtitle="Buat akun untuk mendapatkan akses ke informasi Eskul Musik."
+        >
+            @if ($errors->any())
+                <div class="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                    <p class="font-black">Periksa kembali data kamu.</p>
 
-            <x-auth-input
-                label="Email"
-                name="email"
-                type="email"
-                placeholder="contoh@email.com"
-                required
-                autocomplete="username"
-            />
+                    <ul class="mt-2 list-disc space-y-1 pl-5 font-semibold">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-            <x-auth-input
-                label="Password"
-                name="password"
-                type="password"
-                placeholder="Buat password"
-                required
-                autocomplete="new-password"
-            />
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
 
-            <x-auth-input
-                label="Konfirmasi Password"
-                name="password_confirmation"
-                type="password"
-                placeholder="Ulangi password"
-                required
-                autocomplete="new-password"
-            />
+                <x-auth-input
+                    label="Nama Lengkap"
+                    name="name"
+                    type="text"
+                    placeholder="Masukkan nama lengkap"
+                    required
+                    autofocus
+                    autocomplete="name"
+                />
 
-            <x-auth-button>
-                Register
-            </x-auth-button>
-        </form>
+                <x-auth-input
+                    label="Email"
+                    name="email"
+                    type="email"
+                    placeholder="contoh@email.com"
+                    required
+                    autocomplete="username"
+                />
 
-        <div class="text-center mt-4">
-            <p class="mb-0">
+                <x-auth-input
+                    label="Password"
+                    name="password"
+                    type="password"
+                    placeholder="Buat password"
+                    required
+                    autocomplete="new-password"
+                />
+
+                <x-auth-input
+                    label="Konfirmasi Password"
+                    name="password_confirmation"
+                    type="password"
+                    placeholder="Ulangi password"
+                    required
+                    autocomplete="new-password"
+                />
+
+                <x-auth-button>
+                    Daftar Sekarang
+                </x-auth-button>
+            </form>
+
+            <p class="mt-6 text-center text-sm font-semibold text-slate-600">
                 Sudah punya akun?
-                <a href="{{ route('login') }}" class="auth-link">Login di sini</a>
+                <a href="{{ route('login') }}" class="font-black text-purple-700 hover:text-purple-950">
+                    Login di sini
+                </a>
             </p>
-        </div>
-    </x-auth-card>
+        </x-auth-card>
+    </div>
 </section>
 @endsection

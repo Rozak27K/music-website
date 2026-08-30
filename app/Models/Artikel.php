@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Artikel extends Model
 {
-    protected $fillable = ['judul', 'isi', 'gambar'];
+    protected $fillable = [
+        'judul',
+        'slug',
+        'ringkasan',
+        'isi',
+        'gambar',
+    ];
 }

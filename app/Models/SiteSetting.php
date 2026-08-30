@@ -6,62 +6,48 @@ use Illuminate\Database\Eloquent\Model;
 
 class SiteSetting extends Model
 {
-    protected $fillable = ['key', 'value'];
-
-    public static function defaults(): array
-    {
-        return [
-            'home_title' => 'Selamat Datang di Website Eskul Musik',
-            'home_subtitle' => 'Tempat mengembangkan bakat musik siswa',
-            'home_stat_1_title' => 'Band',
-            'home_stat_1_text' => 'Latihan aransemen dan panggung',
-            'home_stat_2_title' => 'Padus',
-            'home_stat_2_text' => 'Vokal, harmoni, dan kekompakan',
-            'home_stat_3_title' => 'Event',
-            'home_stat_3_text' => 'Dokumentasi penampilan sekolah',
-            'home_activity_heading' => 'Kegiatan Kami',
-            'home_activity_text' => 'Pilih salah satu kegiatan untuk melihat dokumentasi galeri.',
-            'home_article_heading' => 'Artikel',
-
-            'profile_title' => 'Profil Ekstrakurikuler Musik',
-            'profile_subtitle' => 'Mengenal lebih dekat tentang kami',
-            'profile_intro_title' => 'Musik yang tumbuh bareng teman.',
-            'profile_intro_text' => 'Tempat siswa belajar ritme, suara, kerja sama, dan berani tampil.',
-            'profile_about' => 'Ekstrakurikuler Musik adalah wadah bagi siswa untuk menyalurkan minat dan bakat di bidang musik serta melatih kreativitas, kerja sama, dan kepercayaan diri.',
-            'profile_activities' => "Latihan Band\nLatihan Paduan Suara\nPenampilan event sekolah\nPengisi hiburan acara tertentu",
-            'profile_vision' => 'Menjadikan ekskul musik sebagai ruang kreatif, solid, dan menyenangkan.',
-            'profile_mission' => "Mengembangkan bakat musik anggota\nMembangun kekompakan\nTampil di acara sekolah",
-            'profile_board' => "Ketua: Annisa Nisfi Ramadani\nWakil: Novtriza Aquila Asha\nSekretaris 1: Melisa Ayu Setio Wati\nSekretaris 2: Faizah Azzahra\nBendahara 1: Qisa Nahla Billah\nBendahara 2: Kayla Salfana",
-            'profile_schedule' => 'Setiap hari Selasa setelah jam pelajaran',
-            'profile_benefits' => "Mengembangkan bakat\nMelatih percaya diri\nMenambah pengalaman tampil\nMemperluas pertemanan",
-            'instagram_url' => 'https://www.instagram.com/p/DSxgmWIiRhr/?utm_source=ig_web_copy_link',
-            'instagram_label' => '@musiksmeskarofficial',
-
-            'gallery_title' => 'Galeri Eskul Musik',
-            'gallery_subtitle' => 'Dokumentasi kegiatan dan penampilan kami',
-            'gallery_heading' => 'Momen Eskul Musik',
-            'gallery_text' => 'Filter kategori untuk melihat foto kegiatan yang kamu cari.',
-
-            'article_title' => 'Artikel Eskul Musik',
-            'article_subtitle' => 'Informasi, kegiatan, dan manfaat mengikuti ekstrakurikuler musik',
-            'article_heading' => 'Artikel Eskul Musik',
-        ];
-    }
+    protected $fillable = [
+        'key',
+        'value',
+    ];
 
     public static function publicContent(): array
     {
-        $settings = self::query()->pluck('value', 'key')->toArray();
+        return [
+            'home_title' => 'Selamat Datang di Website Eskul Musik',
+            'home_subtitle' => 'Tempat mengembangkan bakat musik siswa SMKN 1 Dukuhturi.',
+            'home_stat_1_title' => 'Latihan Rutin',
+            'home_stat_1_text' => 'Kegiatan musik yang terarah dan menyenangkan.',
+            'home_stat_2_title' => 'Dokumentasi',
+            'home_stat_2_text' => 'Momen kegiatan dan penampilan siswa.',
+            'home_stat_3_title' => 'Karya Siswa',
+            'home_stat_3_text' => 'Ruang untuk belajar, tampil, dan berkembang.',
+            'home_activity_heading' => 'Kegiatan Kami',
+            'home_activity_text' => 'Berbagai kegiatan Eskul Musik SMKN 1 Dukuhturi.',
+            'home_article_heading' => 'Artikel Terbaru',
 
-        return array_merge(self::defaults(), $settings);
-    }
+            'gallery_title' => 'Galeri',
+            'gallery_subtitle' => 'Dokumentasi kegiatan Eskul Musik.',
+            'gallery_heading' => 'Dokumentasi Kegiatan',
+            'gallery_text' => 'Kumpulan foto kegiatan, latihan, dan penampilan siswa.',
 
-    public static function updateContent(array $content): void
-    {
-        foreach (self::defaults() as $key => $default) {
-            self::updateOrCreate(
-                ['key' => $key],
-                ['value' => $content[$key] ?? $default]
-            );
-        }
+            'article_title' => 'Artikel',
+            'article_subtitle' => 'Informasi dan cerita terbaru seputar Eskul Musik.',
+            'article_heading' => 'Artikel Terbaru',
+
+            'profile_title' => 'Profil Eskul Musik',
+            'profile_subtitle' => 'Mengenal kegiatan dan semangat bermusik siswa SMKN 1 Dukuhturi.',
+            'profile_intro_title' => 'Eskul Musik',
+            'profile_intro_text' => 'Wadah siswa untuk belajar, berkarya, dan berkembang lewat musik.',
+            'profile_about' => 'Eskul Musik merupakan tempat bagi siswa SMKN 1 Dukuhturi untuk mengembangkan bakat dalam bidang musik, baik vokal maupun instrumen.',
+            'profile_activities' => "Latihan band\nPaduan suara\nPentas musik\nDokumentasi kegiatan",
+            'profile_vision' => 'Menjadi ekstrakurikuler yang kreatif, disiplin, dan berprestasi dalam bidang musik.',
+            'profile_mission' => "Mengembangkan bakat musik siswa\nMelatih kerja sama dan kedisiplinan\nMemberi ruang tampil dan berkarya",
+            'profile_board' => "Pembina Eskul Musik\nKetua Eskul\nSekretaris\nBendahara",
+            'profile_schedule' => 'Latihan rutin dilaksanakan sesuai jadwal kegiatan sekolah.',
+            'profile_benefits' => "Percaya diri\nKerja sama\nKreativitas\nKedisiplinan",
+            'instagram_url' => 'https://www.instagram.com/',
+            'instagram_label' => '@eskulmusik',
+        ];
     }
 }
