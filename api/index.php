@@ -56,12 +56,15 @@ try {
 
     $app->handleRequest(Request::capture());
 } catch (Throwable $exception) {
-    error_log(sprintf(
-        'Vercel Laravel exception: %s in %s:%s',
-        $exception->getMessage(),
-        $exception->getFile(),
-        $exception->getLine()
-    ));
+    for ($current = $exception; $current !== null; $current = $current->getPrevious()) {
+        error_log(sprintf(
+            'Vercel Laravel exception: %s: %s in %s:%s',
+            $current::class,
+            $current->getMessage(),
+            $current->getFile(),
+            $current->getLine()
+        ));
+    }
 
     http_response_code(500);
 
