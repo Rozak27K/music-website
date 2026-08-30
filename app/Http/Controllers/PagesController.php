@@ -10,21 +10,29 @@ class PagesController extends Controller
 {
     public function index()
     {
-        $galeris = Galeri::latest()
-            ->take(6)
-            ->get();
+        $galeris = rescue(
+            fn () => Galeri::latest()
+                ->take(6)
+                ->get(),
+            collect(),
+            false
+        );
 
-        $artikels = Artikel::latest()
-            ->take(3)
-            ->get();
+        $artikels = rescue(
+            fn () => Artikel::latest()
+                ->take(3)
+                ->get(),
+            collect(),
+            false
+        );
 
         return view('home', compact('galeris', 'artikels'));
     }
 
     public function artikel()
     {
-        $artikels = Artikel::latest()->get();
-        $content = SiteSetting::publicContent();
+        $artikels = rescue(fn () => Artikel::latest()->get(), collect(), false);
+        $content = $this->publicContent();
 
         return view('pages.artikel', compact('artikels', 'content'));
     }
@@ -36,16 +44,21 @@ class PagesController extends Controller
 
     public function profil()
     {
-        $content = SiteSetting::publicContent();
+        $content = $this->publicContent();
 
         return view('pages.profil', compact('content'));
     }
 
     public function galeri()
     {
-        $galeris = Galeri::latest()->get();
-        $content = SiteSetting::publicContent();
+        $galeris = rescue(fn () => Galeri::latest()->get(), collect(), false);
+        $content = $this->publicContent();
 
         return view('pages.galeri', compact('galeris', 'content'));
+    }
+
+    private function publicContent(): array
+    {
+        return rescue(fn () => SiteSetting::publicContent(), SiteSetting::publicContent(), false);
     }
 }
