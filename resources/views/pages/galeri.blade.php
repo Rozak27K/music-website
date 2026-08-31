@@ -92,6 +92,10 @@
                 <a
                     href="{{ $source }}"
                     class="fade-up group relative overflow-hidden rounded-2xl bg-slate-200 shadow-sm transition hover:-translate-y-1 hover:shadow-xl {{ $isFeatured ? 'md:col-span-2 md:row-span-2' : '' }}"
+                    aria-label="Buka foto {{ $item['title'] }}"
+                    data-fancybox="gallery"
+                    data-caption="{{ $item['title'] }}{{ !empty($item['description']) ? ' - ' . $item['description'] : '' }}"
+                    data-thumb="{{ $source }}"
                     data-gallery-item
                     data-category="{{ \Illuminate\Support\Str::slug($item['category']) }}"
                     data-gallery-card
@@ -103,6 +107,7 @@
                     >
 
                     <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent opacity-90"></div>
+                    <div class="absolute inset-0 bg-purple-900/0 transition duration-300 group-hover:bg-purple-900/20"></div>
 
                     <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
                         <span class="rounded-full bg-white/15 px-3 py-1 text-xs font-bold backdrop-blur">
@@ -118,6 +123,10 @@
                                 {{ $item['description'] }}
                             </p>
                         @endif
+
+                        <span class="mt-4 inline-flex translate-y-2 rounded-full border border-white/25 bg-white/15 px-4 py-2 text-xs font-bold opacity-0 backdrop-blur transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                            Lihat Foto
+                        </span>
                     </div>
                 </a>
             @empty

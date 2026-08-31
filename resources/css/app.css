@@ -58,6 +58,30 @@ body {
     will-change: transform, opacity;
 }
 
+.fancybox__container {
+    --fancybox-bg: rgba(20, 22, 26, 0.94);
+    --fancybox-accent-color: #a855f7;
+}
+
+.fancybox__caption {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.f-button {
+    color: #ffffff;
+}
+
+.f-thumbs__slide__button {
+    border-radius: 10px;
+}
+
+.is-nav-selected .f-thumbs__slide__button {
+    box-shadow: 0 0 0 2px #a855f7;
+}
+
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;

@@ -1,6 +1,19 @@
 import './bootstrap';
+import { Fancybox } from '@fancyapps/ui/dist/fancybox/';
+import '@fancyapps/ui/dist/fancybox/fancybox.css';
 
 document.addEventListener('DOMContentLoaded', () => {
+    Fancybox.bind('[data-fancybox="gallery"]', {
+        animated: true,
+        dragToClose: true,
+        Carousel: {
+            infinite: false,
+        },
+        Thumbs: {
+            type: 'classic',
+        },
+    });
+
     const revealElements = document.querySelectorAll('.fade-up');
 
     if ('IntersectionObserver' in window) {
