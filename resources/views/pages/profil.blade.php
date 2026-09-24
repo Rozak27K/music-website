@@ -52,15 +52,17 @@
             <aside class="fade-up rounded-2xl bg-[#202427] p-8 text-white shadow-2xl shadow-slate-300/40">
                 <div class="flex items-center gap-4">
                     <img
-                        src="{{ asset('image/musiklogo-clean.png') }}"
+                        src="{{ asset('image/smk-logo-clean.png') }}"
                         class="h-20 w-20 object-contain drop-shadow-[0_10px_18px_rgba(0,0,0,0.35)]"
-                        alt="Logo Eskul Musik"
+                        alt="Logo SMKN 1 Dukuhturi"
+                        width="80" height="80" decoding="async"
                     >
 
                     <img
-                        src="{{ asset('image/smk-logo-clean.png') }}"
+                        src="{{ asset('image/musiklogo-clean.png') }}"
                         class="h-16 w-16 object-contain drop-shadow-[0_10px_18px_rgba(0,0,0,0.3)]"
-                        alt="Logo SMKN 1 Dukuhturi"
+                        alt="Logo Eskul Musik"
+                        width="64" height="64" decoding="async"
                     >
                 </div>
 

@@ -27,15 +27,17 @@
                 <div>
                     <div class="flex items-center gap-3">
                         <img
-                            src="{{ asset('image/musiklogo-clean.png') }}"
+                            src="{{ asset('image/smk-logo-clean.png') }}"
                             class="h-14 w-14 object-contain drop-shadow-[0_8px_14px_rgba(0,0,0,0.28)]"
-                            alt="Logo Eskul Musik"
+                            alt="Logo SMKN 1 Dukuhturi"
+                            width="56" height="56" loading="lazy" decoding="async"
                         >
 
                         <img
-                            src="{{ asset('image/smk-logo-clean.png') }}"
+                            src="{{ asset('image/musiklogo-clean.png') }}"
                             class="h-12 w-12 object-contain drop-shadow-[0_8px_14px_rgba(0,0,0,0.24)]"
-                            alt="Logo SMK Negeri 1 Dukuhturi"
+                            alt="Logo Eskul Musik"
+                            width="48" height="48" loading="lazy" decoding="async"
                         >
 
                         <div>

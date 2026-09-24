@@ -18,14 +18,16 @@
         <a href="{{ route('home') }}" class="flex items-center gap-3 no-underline">
             <div class="relative flex h-14 w-[88px] items-center">
                 <img
-                    src="{{ asset('image/musiklogo-clean.png') }}"
-                    alt="Logo Eskul Musik"
+                    src="{{ asset('image/smk-logo-clean.png') }}"
+                    alt="Logo SMKN 1 Dukuhturi"
+                    width="56" height="56" decoding="async"
                     class="absolute left-0 z-20 h-14 w-14 object-contain drop-shadow-[0_8px_14px_rgba(0,0,0,0.32)]"
                 >
 
                 <img
-                    src="{{ asset('image/smk-logo-clean.png') }}"
-                    alt="Logo SMKN 1 Dukuhturi"
+                    src="{{ asset('image/musiklogo-clean.png') }}"
+                    alt="Logo Eskul Musik"
+                    width="48" height="48" decoding="async"
                     class="absolute left-10 z-10 h-12 w-12 object-contain drop-shadow-[0_8px_14px_rgba(0,0,0,0.28)]"
                 >
             </div>

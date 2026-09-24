@@ -36,6 +36,11 @@ body {
 }
 
 .fade-up {
+    opacity: 1;
+    transform: none;
+}
+
+.fade-up.reveal-pending {
     opacity: 0;
     transform: translateY(22px);
     transition:

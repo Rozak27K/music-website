@@ -1,22 +1,16 @@
-import './bootstrap';
-import { Fancybox } from '@fancyapps/ui/dist/fancybox/';
-import '@fancyapps/ui/dist/fancybox/fancybox.css';
-
 document.addEventListener('DOMContentLoaded', () => {
-    Fancybox.bind('[data-fancybox="gallery"]', {
-        animated: true,
-        dragToClose: true,
-        Carousel: {
-            infinite: false,
-        },
-        Thumbs: {
-            type: 'classic',
-        },
-    });
+    if (document.querySelector('[data-fancybox="gallery"]')) {
+        import('./gallery-lightbox').catch(() => {
+            // Photo links still open the original image if the module cannot load.
+        });
+    }
 
     const revealElements = document.querySelectorAll('.fade-up');
 
-    if ('IntersectionObserver' in window) {
+    const motionAllowed = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const desktopPointer = window.matchMedia('(min-width: 1024px) and (hover: hover) and (pointer: fine)');
+
+    if ('IntersectionObserver' in window && motionAllowed && desktopPointer.matches) {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -34,7 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         );
 
-        revealElements.forEach((element) => observer.observe(element));
+        revealElements.forEach((element) => {
+            if (element.getBoundingClientRect().top >= window.innerHeight) {
+                element.classList.add('reveal-pending');
+                observer.observe(element);
+            }
+        });
     } else {
         revealElements.forEach((element) => element.classList.add('show'));
     }
@@ -159,6 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.querySelectorAll('[data-gallery-card]').forEach((card) => {
+        if (!desktopPointer.matches || !motionAllowed) return;
+
         card.addEventListener('pointermove', (event) => {
             const rect = card.getBoundingClientRect();
             const x = (event.clientX - rect.left) / rect.width - 0.5;
@@ -174,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const musicLogo = document.querySelector('[data-music-logo]');
 
-    if (musicLogo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (musicLogo && motionAllowed && 'IntersectionObserver' in window) {
         const rings = musicLogo.querySelectorAll('[data-logo-ring]');
         const core = musicLogo.querySelector('[data-logo-core]');
         const bars = musicLogo.querySelectorAll('[data-logo-bars] span');
@@ -211,6 +212,9 @@ document.addEventListener('DOMContentLoaded', () => {
             pointerX = 0;
             pointerY = 0;
         });
+
+        let animationFrame = null;
+        let logoVisible = false;
 
         const animateLogo = (time) => {
             const seconds = time / 1000;
@@ -250,10 +254,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            requestAnimationFrame(animateLogo);
+            animationFrame = requestAnimationFrame(animateLogo);
         };
 
-        makeNote();
-        requestAnimationFrame(animateLogo);
+        const updateAnimation = () => {
+            const shouldAnimate = logoVisible && desktopPointer.matches && !document.hidden;
+
+            if (shouldAnimate && animationFrame === null) {
+                animationFrame = requestAnimationFrame(animateLogo);
+            } else if (!shouldAnimate && animationFrame !== null) {
+                cancelAnimationFrame(animationFrame);
+                animationFrame = null;
+            }
+        };
+
+        new IntersectionObserver(([entry]) => {
+            logoVisible = entry.isIntersecting;
+            updateAnimation();
+        }).observe(musicLogo);
+        document.addEventListener('visibilitychange', updateAnimation);
+        desktopPointer.addEventListener('change', updateAnimation);
     }
 });

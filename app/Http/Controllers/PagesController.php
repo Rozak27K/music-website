@@ -12,7 +12,7 @@ class PagesController extends Controller
     {
         $galeris = rescue(
             fn () => Galeri::latest()
-                ->take(6)
+                ->take(4)
                 ->get(),
             collect(),
             false

@@ -120,6 +120,7 @@
                         <img
                             src="{{ asset('image/' . $activity['image']) }}"
                             alt="{{ $activity['title'] }}"
+                            loading="lazy" decoding="async" width="640" height="480"
                             class="h-72 w-full object-cover transition duration-700 group-hover:scale-110"
                         >
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80"></div>
@@ -140,10 +141,10 @@
 <section class="bg-white py-20">
     <div class="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-[0.95fr_1.05fr]">
         <div class="fade-up grid grid-cols-2 gap-4">
-            <img src="{{ asset('image/event1.jpeg') }}" alt="Dokumentasi musik" class="h-56 w-full rounded-2xl object-cover">
-            <img src="{{ asset('image/tampil.jpeg') }}" alt="Penampilan musik" class="mt-10 h-56 w-full rounded-2xl object-cover">
-            <img src="{{ asset('image/rayis.jpeg') }}" alt="Latihan musik" class="h-56 w-full rounded-2xl object-cover">
-            <img src="{{ asset('image/padus.jpeg') }}" alt="Paduan suara" class="mt-10 h-56 w-full rounded-2xl object-cover">
+            <img src="{{ asset('image/event1.jpeg') }}" alt="Dokumentasi musik" loading="lazy" decoding="async" width="320" height="224" class="h-56 w-full rounded-2xl object-cover">
+            <img src="{{ asset('image/tampil.jpeg') }}" alt="Penampilan musik" loading="lazy" decoding="async" width="320" height="224" class="mt-10 h-56 w-full rounded-2xl object-cover">
+            <img src="{{ asset('image/rayis.jpeg') }}" alt="Latihan musik" loading="lazy" decoding="async" width="320" height="224" class="h-56 w-full rounded-2xl object-cover">
+            <img src="{{ asset('image/padus.jpeg') }}" alt="Paduan suara" loading="lazy" decoding="async" width="320" height="224" class="mt-10 h-56 w-full rounded-2xl object-cover">
         </div>
 
         <div class="fade-up">
@@ -195,6 +196,7 @@
                     src="{{ $item['image'] }}"
                     class="fade-up h-64 w-full rounded-2xl object-cover shadow-sm transition hover:-translate-y-2 hover:shadow-xl"
                     alt="{{ $item['title'] }}"
+                    loading="lazy" decoding="async" width="320" height="256"
                 >
             @empty
                 <div class="fade-up rounded-2xl border border-dashed border-slate-300 bg-white py-12 text-center font-semibold text-slate-500 md:col-span-4">
@@ -231,6 +233,7 @@
                                 src="{{ $articleImage }}"
                                 class="h-56 w-full object-cover"
                                 alt="{{ $artikel->judul }}"
+                                loading="lazy" decoding="async" width="640" height="400"
                             >
                         @endif
 

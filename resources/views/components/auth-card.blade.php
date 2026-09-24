@@ -4,15 +4,15 @@
     <div class="mb-7 text-center">
         <div class="mx-auto mb-5 flex w-fit items-center">
             <img
-                src="{{ asset('image/musiklogo-clean.png') }}"
+                src="{{ asset('image/smk-logo-clean.png') }}"
                 class="h-16 w-16 object-contain drop-shadow-[0_8px_14px_rgba(126,34,206,0.25)]"
-                alt="Logo Eskul Musik"
+                alt="Logo SMKN 1 Dukuhturi"
             >
 
             <img
-                src="{{ asset('image/smk-logo-clean.png') }}"
+                src="{{ asset('image/musiklogo-clean.png') }}"
                 class="-ml-3 h-14 w-14 object-contain drop-shadow-[0_8px_14px_rgba(15,23,42,0.18)]"
-                alt="Logo SMKN 1 Dukuhturi"
+                alt="Logo Eskul Musik"
             >
         </div>
 

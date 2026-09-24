@@ -15,6 +15,7 @@
         src="{{ $image }}"
         class="h-56 w-full object-cover"
         alt="{{ $artikel->judul }}"
+        loading="lazy" decoding="async" width="640" height="400"
     >
 
     <div class="flex flex-1 flex-col p-6">

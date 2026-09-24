@@ -103,6 +103,7 @@
                     <img
                         src="{{ $source }}"
                         alt="{{ $item['title'] }}"
+                        loading="lazy" decoding="async" width="640" height="480"
                         class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                     >
 
